@@ -44,12 +44,8 @@ class UserController {
     }
 
     static login (req, res, next) {
-        console.log(req.body, '-------------1');
         let message;
-        const { username, email, password } = req.body;
-        // if (!username) {
-        //     message = 'username cannot be empty';
-        // };
+        const { email, password } = req.body;
         if (!email) {
             message = 'email cannot be empty';
         };
@@ -94,4 +90,4 @@ class UserController {
     }
 }
 
-module.exports = UserController
+module.exports = UserController;
