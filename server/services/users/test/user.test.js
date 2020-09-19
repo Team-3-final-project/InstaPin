@@ -15,7 +15,7 @@ afterAll((done) => {
 beforeAll(async (done) => {
     const userCreate = {
         username: 'username',
-        email: "user@mail.com",
+        email: "user@user.com",
         password: '1234',
     }
     User.create(userCreate)
@@ -31,7 +31,7 @@ describe('User Routes', () => {
     describe('POST /login', () => {
         test('200 Login Succes - should return json message', (done) => {
             const userLogin = {
-                username: 'username',
+                email: 'user@user.com',
                 password: '1234',
             }
             return request(app)
@@ -48,9 +48,9 @@ describe('User Routes', () => {
                     done(err)
                 })
         })
-        test('404 login failed empty username - should return json message', (done) => {
+        test('400 login failed empty email - should return json message', (done) => {
             const userLoginErr = {
-                username: '',
+                email: '',
                 password: '1234'
             }
             return request(app)
@@ -59,17 +59,17 @@ describe('User Routes', () => {
                 .set('Accept', 'application/json')
                 .then(response => {
                     const { body, status } = response
-                    expect(status).toBe(404)
-                    expect(body).toHaveProperty('message', 'username cannot be empty')
+                    expect(status).toBe(400)
+                    expect(body).toHaveProperty('message', 'email cannot be empty')
                     done()
                 })
                 .catch((err) => {
                     done(err)
                 })
         })
-        test('404 login failed empty password - should return json message', (done) => {
+        test('400 login failed empty password - should return json message', (done) => {
             const userLoginError = {
-                username: "username",
+                email: 'user@user.com',
                 password: '',
             }
             return request(app)
@@ -78,7 +78,7 @@ describe('User Routes', () => {
                     .set('Accept', 'application/json')
                     .then(response => {
                         const { body, status } = response
-                        expect(status).toBe(404)
+                        expect(status).toBe(400)
                         expect(body).toHaveProperty('message', 'password cannot be empty')
                         done()
                     })
@@ -148,7 +148,7 @@ describe('User Routes', () => {
                     done(err)
                 })
         })
-        test('400 Register failed empty email - should return json message', (done) => {
+        test('400 Register failed empty password - should return json message', (done) => {
             const userRegister = {
                 username: 'username',
                 email: 'user@mail.com',
