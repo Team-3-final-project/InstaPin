@@ -67,7 +67,6 @@ class UserController {
             where: {email: req.body.email}
         })
             .then(data => {
-                console.log(data,'<<<<<<<<<<<<<<<<');
                 if (!data) {
                     throw {
                         status: 404,
@@ -90,7 +89,6 @@ class UserController {
                 }
             })
             .catch (err => {
-                console.log(err, '-----------2');
                 next(err)
             })
     }
