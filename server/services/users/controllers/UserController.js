@@ -44,12 +44,8 @@ class UserController {
     }
 
     static login (req, res, next) {
-        console.log(req.body, '-------------1');
         let message;
-        const { username, email, password } = req.body;
-        // if (!username) {
-        //     message = 'username cannot be empty';
-        // };
+        const { email, password } = req.body;
         if (!email) {
             message = 'email cannot be empty';
         };
@@ -67,7 +63,6 @@ class UserController {
             where: {email: req.body.email}
         })
             .then(data => {
-                console.log(data,'<<<<<<<<<<<<<<<<');
                 if (!data) {
                     throw {
                         status: 404,
@@ -90,10 +85,9 @@ class UserController {
                 }
             })
             .catch (err => {
-                console.log(err, '-----------2');
                 next(err)
             })
     }
 }
 
-module.exports = UserController
+module.exports = UserController;
