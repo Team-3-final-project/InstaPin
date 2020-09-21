@@ -1,0 +1,101 @@
+[
+  {
+    "name": "urlgen",
+    "value": "\"{\\\"180.244.67.37\\\": 7713}:1kKCiQ:zYblb1lZ7Zn6bk03_yZkF0YW-fs\"",
+    "domain": ".instagram.com",
+    "path": "/",
+    "expires": -1,
+    "size": 68,
+    "httpOnly": true,
+    "secure": true,
+    "session": true
+  },
+  {
+    "name": "rur",
+    "value": "ASH",
+    "domain": ".instagram.com",
+    "path": "/",
+    "expires": -1,
+    "size": 6,
+    "httpOnly": true,
+    "secure": true,
+    "session": true
+  },
+  {
+    "name": "shbid",
+    "value": "14782",
+    "domain": ".instagram.com",
+    "path": "/",
+    "expires": 1601264530.379666,
+    "size": 10,
+    "httpOnly": true,
+    "secure": true,
+    "session": false
+  },
+  {
+    "name": "csrftoken",
+    "value": "SZ08OTan6FO2rvkhPIsAstMAorMFWluX",
+    "domain": ".instagram.com",
+    "path": "/",
+    "expires": 1632109330.37958,
+    "size": 41,
+    "httpOnly": false,
+    "secure": true,
+    "session": false
+  },
+  {
+    "name": "mid",
+    "value": "X2ghDgAEAAH0HNdWL8zDCLFJLNHF",
+    "domain": ".instagram.com",
+    "path": "/",
+    "expires": 1916019726.595259,
+    "size": 31,
+    "httpOnly": false,
+    "secure": true,
+    "session": false
+  },
+  {
+    "name": "shbts",
+    "value": "1600659730.2706778",
+    "domain": ".instagram.com",
+    "path": "/",
+    "expires": 1601264530.379703,
+    "size": 23,
+    "httpOnly": true,
+    "secure": true,
+    "session": false
+  },
+  {
+    "name": "sessionid",
+    "value": "14312552290%3AZZngTve5dWtfE3%3A10",
+    "domain": ".instagram.com",
+    "path": "/",
+    "expires": 1632195729.859689,
+    "size": 42,
+    "httpOnly": true,
+    "secure": true,
+    "session": false
+  },
+  {
+    "name": "ds_user_id",
+    "value": "14312552290",
+    "domain": ".instagram.com",
+    "path": "/",
+    "expires": 1608435730.379776,
+    "size": 21,
+    "httpOnly": false,
+    "secure": true,
+    "session": false
+  },
+  {
+    "name": "ig_did",
+    "value": "96A8FDE8-67D1-4FDB-8EC3-F8CDD6EF0716",
+    "domain": ".instagram.com",
+    "path": "/",
+    "expires": 1916019726.595188,
+    "size": 42,
+    "httpOnly": true,
+    "secure": true,
+    "session": false
+  }
+]
