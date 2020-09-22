@@ -86,7 +86,8 @@ Headers
 Body
 ```json
 {
-    "url": "http://1.bp.blogspot.com/-mkYXVt0kLPw/UV8uG5neCiI/AAAAAAAAASY/VeGiKjUyhhU/s1600/Justin+Bieber+Childhood+Picture+(8).jpg"
+    "url": "http://1.bp.blogspot.com/-mkYXVt0kLPw/UV8uG5neCiI/AAAAAAAAASY/VeGiKjUyhhU/s1600/Justin+Bieber+Childhood+Picture+(8).jpg",
+    "username": "justinbieber"
 }
 ```
 
@@ -98,11 +99,10 @@ Response:
 
 ```json
 {
-    "posts": {
-        "url": "http://1.bp.blogspot.com/-mkYXVt0kLPw/UV8uG5neCiI/AAAAAAAAASY/VeGiKjUyhhU/s1600/Justin+Bieber+Childhood+Picture+(8).jpg",
-        "email": "user1@mail.com",
-        "_id": "5f68e05181550971cca16446"
-    }
+    "_id": "5f69824179d241618495ce2d",
+    "url": "http://1.bp.blogspot.com/-mkYXVt0kLPw/UV8uG5neCiI/AAAAAAAAASY/VeGiKjUyhhU/s1600/Justin+Bieber+Childhood+Picture+(8).jpg",
+    "email": "user1@mail.com",
+    "username": "justinbieber"
 }
 ```
 

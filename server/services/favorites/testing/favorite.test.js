@@ -7,7 +7,7 @@ let id = {
     igtv: '',
     highlight: ''
 }
-const access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZ3JhY2UiLCJlbWFpbCI6InVzZXIxQG1haWwuY29tIiwiaWF0IjoxNjAwNjU5MTI0fQ.VYgGtwBJZ_yYJwjL_r2yKCEXcOyJpjh_rPNnWg_siVY'
+const access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdyYWNlY29yaW5lQG1haWwuY29tIiwidXNlcm5hbWUiOiJzaWFwYSIsImlhdCI6MTYwMDc3MzQ4OX0.QAasX5utUdGUfyVdqzZ8TxYCiDUK80fldbned_pF-Ww'
 
 describe('GET /favorites successfully', () => {
     it('test get favorite posts from login user will return array of posts', (done)=>  {
