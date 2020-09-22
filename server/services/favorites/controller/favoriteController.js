@@ -40,28 +40,21 @@ class favoriteController {
 
     static async addFavorite (req,res,next) {
         try {
-            const {url} = req.body
+            let {image_url, video_url, username, id} = req.body
             const {type} = req.params
             const {email} = req.userLogin
+            if(!image_url) image_url = null
+            if(!video_url) video_url = null
             const addedToFavorite = await Favorite.addFavorite(type, {
-                url,
-                email
+                image_url,
+                video_url,
+                email,
+                username,
+                id
             })
             res.status(201).json({[type]: addedToFavorite.ops[0]})
         }
         catch(err){
-            next(err)
-        }
-    }
-
-    static async updateFavorite (req,res,next) {
-        try {
-            const {type, url} = req.body
-            const {id} = req.params
-            const updatedFavorite = await Favorite.updateFavorite(type, id, url)
-            res.status(200).json(updatedFavorite.value)
-        }
-        catch(err) {
             next(err)
         }
     }
