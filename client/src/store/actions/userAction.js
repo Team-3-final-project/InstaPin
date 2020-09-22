@@ -2,7 +2,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 
 export const userRegist = (user) => {
-    console.log(user, 'di action');
     return (dispatch) => {
         axios({
             method: 'POST',
@@ -14,7 +13,6 @@ export const userRegist = (user) => {
             }
         })
             .then(({data}) => {
-                console.log(data);
                 dispatch({
                     type: 'SET_USER_REGIS',
                     payload: {
@@ -38,7 +36,6 @@ export const userRegist = (user) => {
 }
 
 export const userLogin = (user) => {
-    console.log(user, 'di action');
     return (dispatch) => {
         axios({
             method: 'POST',
@@ -49,16 +46,24 @@ export const userLogin = (user) => {
             }
         })
             .then(({data}) => {
-                console.log(data);
                 dispatch({
-                    type: 'SET_USER_REGIS',
+                    type: 'SET_USER_LOGIN',
                     payload: {
                         access_token: data
                     }
                 })
             })
             .catch(err => {
-                alert(err)
+                Swal.fire({
+                    title: 'Incorrect email or password',
+                    showClass: {
+                      popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                      popup: 'animate__animated animate__fadeOutUp'
+                    },
+                    icon: 'error'
+                  })
             })
     }
 }
