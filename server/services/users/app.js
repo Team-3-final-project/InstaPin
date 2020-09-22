@@ -12,4 +12,7 @@ app.use(express.urlencoded({ extended: true}));
 app.use('/', routes)
 app.use(errorHandler)
 
-module.exports = app
+app.listen(PORT, () => {
+    console.log(`running...`);
+})
+// module.exports = app
