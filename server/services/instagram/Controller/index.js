@@ -4,6 +4,7 @@ const fs = require("fs");
 
 class InstagramController {
   static async profile(req, res) {
+    console.log('testing', req.params.user);
     let is_highlight = true;
 
     if (is_highlight) {
@@ -29,12 +30,15 @@ class InstagramController {
     axios
       .get(`https://www.instagram.com/${req.params.user}/`)
       .then(async (resp) => {
+        console.log('testing masuk', resp.data);
         const x = resp.data.match(
           /(?<=<script type=\"text\/javascript\">window\._sharedData\s=\s).*?(?=<\/script>)/gim
         );
 
         const data = JSON.parse(x[0].slice(0, x[0].length - 1)).entry_data
           .ProfilePage[0].graphql.user;
+
+        console.log(data);
 
         const biography = {
           id: data.id,
@@ -82,10 +86,17 @@ class InstagramController {
           return data;
         });
 
+        console.log(posts, igtv, biography)
+
         console.log(is_highlight);
 
         if (is_highlight) {
           console.log("masukkkkkkkkkkk");
+
+          const cookiesString = fs.readFileSync("./cookies.json");
+          const cookies = JSON.parse(cookiesString);
+          await page.setCookie(...cookies);
+
           await page.goto(`https://www.instagram.com/${req.params.user}/`);
 
           await page.setRequestInterception(true);
@@ -102,16 +113,6 @@ class InstagramController {
                 igtv,
                 highlight: highlight_data.data.user.edge_highlight_reels.edges,
               });
-            } else {
-              await browser.close();
-              return res
-                .status(200)
-                .json({
-                  biography,
-                  posts,
-                  igtv,
-                  highlight: "highlight cannot be fetch try again",
-                });
             }
           });
         } else {
@@ -150,7 +151,7 @@ class InstagramController {
       await doLogin(
         "https://www.instagram.com/accounts/login/",
         "23tldr",
-        "bermaintembak2an"
+        "Bermaintembak2an"
       );
       await page.waitFor(2500);
       const cookies = await page.cookies();
@@ -229,7 +230,7 @@ class InstagramController {
       await doLogin(
         "https://www.instagram.com/accounts/login/",
         "23tldr",
-        "bermaintembak2an"
+        "Bermaintembak2an"
       );
       await page.waitFor(2500);
       const cookies = await page.cookies();
