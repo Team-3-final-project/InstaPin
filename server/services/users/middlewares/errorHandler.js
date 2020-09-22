@@ -7,8 +7,7 @@ function errorHandler (err, req, res, next) {
             res.status(err.status).json({message: err.message});
             break;
         case 'ValidationError':
-            res.status(err.status).json({message: err.message});
-            break;
+            return res.status(err.status).json({message: err.message});
         case 'NotFound':
             res.status(err.status).json({message: err.message});
             break;

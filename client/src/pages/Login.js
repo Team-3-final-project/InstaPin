@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useDispatch} from 'react-redux'
+import { Link as Goes } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,13 +15,14 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { userLogin } from '../store/actions/userAction'
+import Swal from 'sweetalert2'
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        InstaPin
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -68,7 +70,16 @@ export default function SignIn() {
         console.log(user, '<<<');
         const { email, password } = user
         if ( !email || !password ) {
-            return alert('isi semua')
+            return Swal.fire({
+                title: 'Please fill all fields!',
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                },
+                icon: 'error'
+              })
         }
         dispatch(userLogin(user))
     }
@@ -122,9 +133,9 @@ export default function SignIn() {
           </Button>
           <Grid container justify="center">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Goes to="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
-              </Link>
+              </Goes>
             </Grid>
           </Grid>
         </form>
