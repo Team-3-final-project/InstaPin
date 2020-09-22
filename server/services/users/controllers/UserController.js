@@ -4,24 +4,25 @@ const { User } = require('../models')
 
 class UserController {
     static register (req, res, next) {
+        console.log('---------1');
         const { username, email, password } = req.body
         if (!username) {
             throw {
-                type: 'EmptyField',
+                name: 'EmptyField',
                 status: 400,
                 message: 'username cannot be empty'
             }
         }
         if (!email) {
             throw {
-                type: 'EmptyField',
+                name: 'EmptyField',
                 status: 400,
                 message: 'email cannot be empty'
             }
         }
         if (!password) {
             throw {
-                type: 'EmptyField',
+                name: 'EmptyField',
                 status: 400,
                 message: 'password cannot be empty'
             }
@@ -32,14 +33,17 @@ class UserController {
             password
         })
             .then(newUser => {
+                console.log('--------------2');
                 const access_token = encode ({
                     id: newUser.id,
-                    username: newUser.username
+                    username: newUser.username,
+                    email: newUser.email
                 })
-                res.status(201).json({ access_token })
+                return res.status(201).json({ access_token })
             })
             .catch(err => {
-                return err
+                console.log(err);
+                next(err)
             })
     }
 
@@ -55,7 +59,7 @@ class UserController {
         if (message) {
             throw {
                 status: 400,
-                type: 'EmptyField',
+                name: 'EmptyField',
                 message: message
             };
         };
@@ -66,19 +70,20 @@ class UserController {
                 if (!data) {
                     throw {
                         status: 404,
-                        type: 'NotFound',
+                        name: 'NotFound',
                         message: 'user not found'
                     }
                 }
                 if (checkPassword(password, data.password)) {
                     const access_token = encode ({
                         id: data.id,
-                        username: data.username
+                        username: data.username,
+                        email: data.email
                     })
                     return res.status(200).json({ access_token })
                 } else {
                     throw {
-                        type: 'ValidationError',
+                        name: 'ValidationError',
                         message: 'Username or password incorrect',
                         status: 401
                     }
@@ -87,6 +92,24 @@ class UserController {
             .catch (err => {
                 next(err)
             })
+    }
+
+    static async checkUser (req,res,next) {
+        try{
+            const {email} = req.body
+            const check = await User.findOne({
+                where: {
+                    email
+                }
+            })
+            if(!check) {
+                return res.status(200).json({isValid: false})
+            }
+            return res.status(200).json({isValid: true})
+        }
+        catch(err) {
+            next(err)
+        }
     }
 }
 
