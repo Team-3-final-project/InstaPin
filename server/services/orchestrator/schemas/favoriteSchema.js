@@ -4,7 +4,6 @@ const {
 const axios = require("axios");
 const deleteInput = '(_id: ID!, access_token: String) : Data'
 const dataWithoutId = `
-    access_token: String
     image_url: String,
     video_url: String,
     username: String,
@@ -14,7 +13,11 @@ const dataWithoutId = `
 const typeDefs = gql `
 
     type Data {
-        ${dataWithoutId},
+        image_url: String,
+        video_url: String,
+        username: String,
+        id: String,
+        email: String
         _id: ID
     }
 
@@ -26,10 +29,21 @@ const typeDefs = gql `
     }
 
     input InputData {
-        ${dataWithoutId}
+        access_token: String,
+        image_url: String,
+        video_url: String,
+        username: String,
+        id: String,
+        email: String
+    }
+
+    type test {
+        name: String,
+        id: String
     }
 
     extend type Query {
+        getTest : [test]
         getFavorites (access_token: String): Favorite
 
         getPosts (access_token: String) : [Data]
@@ -56,6 +70,12 @@ const typeDefs = gql `
 const uri = 'http://localhost:3003/favorites'
 const resolvers = {
     Query: {
+        getTest: (_, args) => {
+            return [
+                {name: 'siapa', id:'123456'},
+                {name: 'udin', id:'654321'}
+            ]
+        },
         getFavorites: async (_, args) => {
             const data = await getFromServer(args, '')
             return data
