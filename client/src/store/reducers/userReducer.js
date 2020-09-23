@@ -1,5 +1,6 @@
 const initialState = {
-    access_token: null
+    access_token: null,
+    email: null
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -7,12 +8,14 @@ export const userReducer = (state = initialState, action) => {
         case "SET_USER_REGIS":
             return {
                 ...state,
-                access_token: action.payload.access_token
+                access_token: action.payload.access_token,
+                email: action.email
             }
         case "SET_USER_LOGIN":
             return {
                 ...state,
-                access_token: action.payload.access_token
+                access_token: action.payload.access_token,
+                email: action.email
             }
         default:
             return state

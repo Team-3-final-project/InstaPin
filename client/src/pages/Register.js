@@ -17,13 +17,15 @@ import Container from '@material-ui/core/Container';
 import { userRegist } from '../store/actions/userAction'
 import Swal from 'sweetalert2'
 import { useHistory } from 'react-router';
+import GoogleBtn from '../components/GoogleBtn';
+import Navbar from '../components/navbarhome'
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="textSecondary" align="center" style={{fontFamily: 'Montserrat', fontWeight: 700}}>
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        InstaPIn
+      <Link color="inherit" href="/">
+        InstaPin
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -85,16 +87,19 @@ export default function SignUp() {
           })
       }
       dispatch(userRegist(user))
+      history.push('/')
   }
 
   return (
+    <>
+    <Navbar />
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography style={{fontFamily: 'Montserrat', fontWeight: 700}} component="h1" variant="h5">
           Sign up
         </Typography>
         <form className={classes.form} noValidate onSubmit={(e) => doSubmit(e)}>
@@ -145,6 +150,7 @@ export default function SignUp() {
             </Grid>
           </Grid>
           <Button
+            style={{fontFamily: 'Montserrat', fontWeight: 700}}
             type="submit"
             fullWidth
             variant="contained"
@@ -155,7 +161,7 @@ export default function SignUp() {
           </Button>
           <Grid container justify="center">
             <Grid item>
-              <Goes to="/login" variant="body2">
+              <Goes to="/login" variant="body2" style={{fontFamily: 'Montserrat', fontWeight: 700}}>
                 Already have an account? Sign in
               </Goes>
             </Grid>
@@ -166,5 +172,6 @@ export default function SignUp() {
         <Copyright />
       </Box>
     </Container>
+    </>
   );
 }
