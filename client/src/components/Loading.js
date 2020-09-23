@@ -1,17 +1,6 @@
-import React, { useState, useEffect } from "react";
-import {
-  useParams,
-  useRouteMatch,
-  useHistory,
-  Switch,
-  Route,
-} from "react-router-dom";
+import React from "react";
 import "../pages/Profile.css";
-import { getProfile } from "../store/actions";
-import { useSelector, useDispatch } from "react-redux";
 import Container from "react-bootstrap/Container";
-import NavbarHome from "../components/navbar.js";
-import DisplayPicture from "../components/displaypicture.js";
 import Button from "react-bootstrap/Button";
 import CardLoading from "./cardloading.js";
 

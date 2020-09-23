@@ -10,11 +10,11 @@ import Swal from 'sweetalert2'
 export default function PhotoCard(props) {
   const params = useParams()
   const {profile} = params
-  const { image_url, id, likes, uploaded_at } = props.data;
+  const { image_url, id } = props.data;
   const {type} = props
   const access_token = localStorage.access_token
   const [isFavorite, setIsFavorite] = useState(false)
-  const {loading, error, data} = useQuery(FETCH_ALL, {
+  const { error, data} = useQuery(FETCH_ALL, {
     variables: { access_token: localStorage.access_token }
   })
 
