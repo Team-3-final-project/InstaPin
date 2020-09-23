@@ -1,8 +1,72 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import {useMutation} from '@apollo/client'
+import {DEL_POST, DEL_HIGHLIGHT, DEL_IGTV, DEL_STORY} from '../Mutation'
+import {FETCH_ALL} from '../Query'
+import Swal from 'sweetalert2'
 
 export default function FavoriteVideoCard(props) {
-  const { video_url, views, likes, uploaded_at } = props.data;
+  const { video_url, _id } = props.data;
+  const {type} = props
+  const access_token = localStorage.access_token
+
+  const [deletePost] = useMutation(DEL_POST, {
+    refetchQueries: [{query: FETCH_ALL, variables: { access_token } }]
+  })
+  const [deleteHighlight] = useMutation(DEL_HIGHLIGHT, {
+    refetchQueries: [{query: FETCH_ALL, variables: { access_token } }]
+  })
+  const [deleteStory] = useMutation(DEL_STORY, {
+    refetchQueries: [{query: FETCH_ALL, variables: { access_token } }]
+  })
+  const [deleteIgtv] = useMutation(DEL_IGTV, {
+    refetchQueries: [{query: FETCH_ALL, variables: { access_token } }]
+  })
+
+  const delQuery = {
+    _id,
+    access_token
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        switch (type) {
+          case 'posts':
+            deletePost({variables: delQuery})
+            break;
+          case 'highlights':
+            deleteHighlight({variables: delQuery})
+            break;
+          case 'stories':
+            deleteStory({variables: delQuery})
+            break;
+          case 'igtvs':
+            deleteIgtv({variables: delQuery})
+            break;
+          default:
+            break
+        }
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+
+      }
+    })
+  }
+
 
   return (
     <div className="photo-card shadow-sm mr-2 mt-2 ml-2 mb-2">
@@ -18,6 +82,7 @@ export default function FavoriteVideoCard(props) {
       <div className="d-flex justify-content-center">
         <Button
           variant="light"
+          onClick={(e) => handleClick(e)}
           style={{ fontWeight: 700, fontSize: "16px" }}
           className="ml-2 rounded-pill shadow-sm"
         >
