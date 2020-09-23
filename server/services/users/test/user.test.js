@@ -28,6 +28,17 @@ beforeAll(async (done) => {
 })
 
 describe('User Routes', () => {
+    // describe('GET /', () => {
+    //     test('200 Homepage - should return json message', (done) => {
+    //         return request(app)
+    //             .get('/')
+    //             .set('Accept', 'application/json')
+    //             .then(response => {
+    //                 const { body } = response
+    //                 expect(body).toHaveProperty([])
+    //             })
+    //     })
+    // })
     describe('POST /login', () => {
         test('200 Login Succes - should return json message', (done) => {
             const userLogin = {
@@ -85,6 +96,44 @@ describe('User Routes', () => {
                     .catch((err) => {
                         done (err)
                     })
+        })
+        test('404 Login failed incorrect email - should return json message', (done) => {
+            const userRegister = {
+                email: 'adsdadadsasdas@mail.com',
+                password: '1234'
+            }
+            return request(app)
+                .post('/login')
+                .send(userRegister)
+                .set('Accept', 'application/json')
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(404)
+                    expect(body).toHaveProperty('message', 'user not found')
+                    done()
+                })
+                .catch((err) => {
+                    done(err)
+                })
+        })
+        test('401 Login failed incorrect password - should return json message', (done) => {
+            const userRegister = {
+                email: 'user@user.com',
+                password: '123444'
+            }
+            return request(app)
+                .post('/login')
+                .send(userRegister)
+                .set('Accept', 'application/json')
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(401)
+                    expect(body).toHaveProperty('message', 'Username or password incorrect')
+                    done()
+                })
+                .catch((err) => {
+                    done(err)
+                })
         })
     })
     describe('POST /register', () => {
@@ -167,6 +216,66 @@ describe('User Routes', () => {
                 .catch((err) => {
                     done(err)
                 })
+        })
+        // test('400 Register failed duplicate email - should return json message', (done) => {
+        //     const userRegister = {
+        //         username: 'username',
+        //         email: 'user@mail.com',
+        //         password: '1234'
+        //     }
+        //     return request(app)
+        //         .post('/register')
+        //         .send(userRegister)
+        //         .set('Accept', 'application/json')
+        //         .then(response => {
+        //             expect.fail()
+        //             // const { body, status } = response
+        //             // expect(status).toBe(409)
+        //             // expect(body).toHaveProperty('message', 'Email already registered!')
+        //             done()
+        //         })
+        //         .catch((err) => {
+        //             expect(err['name'].to.be.equal('SequelizeUniqueConstraintError:'))
+        //             done()
+        //         })
+        // })
+    })
+    describe('POST /checkUser', () => {
+        test('200 isValid true - should return json message', (done) => {
+            const userCheck = {
+                email: 'user@user.com'
+            }
+            return request(app)
+                .post('/checkUser')
+                .send(userCheck)
+                .set('Accept', 'application/json')
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(200)
+                    expect(body).toHaveProperty('isValid', true)
+                    done()
+                }) 
+                .catch(err => {
+                    console.log(err);
+                })
+        })
+        test('200 isValid false - should return json message', (done) => {
+            const userCheck = {
+                email: 'userasdsadsa@user.com'
+            }
+            return request(app)
+                .post('/checkUser')
+                .send(userCheck)
+                .set('Accept', 'application/json')
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(200)
+                    expect(body).toHaveProperty('isValid', false)
+                    done()
+                })
+                .catch(err => {
+                    console.log(err);
+                }) 
         })
     })
 })

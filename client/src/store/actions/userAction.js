@@ -13,6 +13,8 @@ export const userRegist = (user) => {
             }
         })
             .then(({data}) => {
+                localStorage.access_token = data.access_token
+                localStorage.email = user.email
                 dispatch({
                     type: 'SET_USER_REGIS',
                     payload: {
@@ -46,6 +48,8 @@ export const userLogin = (user) => {
             }
         })
             .then(({data}) => {
+                localStorage.access_token = data.access_token
+                localStorage.email = user.email
                 dispatch({
                     type: 'SET_USER_LOGIN',
                     payload: {
