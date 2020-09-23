@@ -4,7 +4,7 @@ const fs = require("fs");
 
 class InstagramController {
   static async profile(req, res) {
-    console.log('testing', req.params.user);
+    console.log("testing", req.params.user);
     let is_highlight = true;
 
     if (is_highlight) {
@@ -24,13 +24,9 @@ class InstagramController {
       }
     }
 
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
     axios
       .get(`https://www.instagram.com/${req.params.user}/`)
       .then(async (resp) => {
-        console.log('testing masuk', resp.data);
         const x = resp.data.match(
           /(?<=<script type=\"text\/javascript\">window\._sharedData\s=\s).*?(?=<\/script>)/gim
         );
@@ -86,41 +82,12 @@ class InstagramController {
           return data;
         });
 
-        console.log(posts, igtv, biography)
-
         console.log(is_highlight);
 
-        if (is_highlight) {
-          console.log("masukkkkkkkkkkk");
+        return res
+          .status(200)
+          .json({ biography, posts, igtv, highlight: is_highlight });
 
-          const cookiesString = fs.readFileSync("./cookies.json");
-          const cookies = JSON.parse(cookiesString);
-          await page.setCookie(...cookies);
-
-          await page.goto(`https://www.instagram.com/${req.params.user}/`);
-
-          await page.setRequestInterception(true);
-          page.on("response", async (response) => {
-            console.log(response.url());
-            const highlight_data = await response.json();
-            console.log(highlight_data);
-            if (highlight_data.data.user.edge_highlight_reels) {
-              console.log("masuk");
-              await browser.close();
-              return res.send({
-                biography,
-                posts,
-                igtv,
-                highlight: highlight_data.data.user.edge_highlight_reels.edges,
-              });
-            }
-          });
-        } else {
-          return res
-            .status(200)
-            .json({ biography, posts, igtv, highlight: [] });
-          await browser.close();
-        }
       })
       .catch((err) => res.status(500).json(err));
   }
@@ -183,9 +150,7 @@ class InstagramController {
         console.log(data);
         if (data.data.reels_media) {
           console.log("masuk");
-          return res
-            .status(200)
-            .json(data.data.reels_media[0].items);
+          return res.status(200).json(data.data.reels_media[0].items);
         }
       });
     } catch (err) {
@@ -193,15 +158,65 @@ class InstagramController {
       return res.status(200).json({ stories: [] });
     }
 
-    await page.waitFor(2000);
+    await page.waitFor(1500);
 
     await page.screenshot({ path: "4-testing.png" });
 
-    await page.waitFor(3000);
+    await page.waitFor(1500);
 
     await page.screenshot({ path: "5-testing.png" });
 
     await browser.close();
+  }
+
+  static async get_highlight(req, res) {
+    const browser = await puppeteer.launch();
+    var page = await browser.newPage();
+
+    async function doLogin(url, username, password) {
+      await page.goto(url);
+
+      await page.waitForSelector('input[name="username"]');
+      await page.type('input[name="username"]', username);
+      await page.type('input[name="password"]', password);
+      await page.click('button[type="submit"]');
+    }
+
+    const cookiesPath = "./cookies.json";
+    const cookiesExists = fs.existsSync(cookiesPath);
+
+    if (cookiesExists) {
+      console.log("--------------------> cookies");
+      const cookiesString = fs.readFileSync("./cookies.json");
+      const cookies = JSON.parse(cookiesString);
+      await page.setCookie(...cookies);
+    } else {
+      console.log("--------------------> login");
+      await doLogin(
+        "https://www.instagram.com/accounts/login/",
+        "23tldr",
+        "Bermaintembak2an"
+      );
+      await page.waitFor(2500);
+      const cookies = await page.cookies();
+      fs.writeFileSync("./cookies.json", JSON.stringify(cookies, null, 2));
+    }
+
+    await page.goto(`https://www.instagram.com/${req.params.user}/`);
+
+    await page.setRequestInterception(true);
+    page.on("response", async (response) => {
+      console.log(response.url());
+      const highlight_data = await response.json();
+      console.log(highlight_data);
+      if (highlight_data.data.user.edge_highlight_reels) {
+        console.log("masuk");
+        await browser.close();
+        return res.send({
+          highlight: highlight_data.data.user.edge_highlight_reels.edges.map(x => x.node)
+        });
+      }
+    });
   }
 
   static async highlight(req, res) {
