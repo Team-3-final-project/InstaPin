@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   useHistory
 } from "react-router-dom";
 import "./Home.css";
 import Form from "react-bootstrap/Form";
 import NavbarHome from '../components/navbarhome.js';
+import _ from 'lodash';
 
 export default function Home() {
   const history = useHistory();
+
+  const inputLodash = _.debounce(e => {
+    if (e.length > 2)
+      history.push(`/${e}`)
+  }, 800);
 
   return (
     <div style={{ background: "#F8F5F5" }} className="vh-100">
@@ -21,7 +27,7 @@ export default function Home() {
         <div style={{width: "60vw"}}>
           <Form>
             <Form.Group controlId="exampleForm.ControlInput1" className="shadow rounded-pill">
-              <Form.Control className="form-home rounded-pill" type="email" placeholder="Search username..." />
+              <Form.Control onChange={e => inputLodash(e.target.value)} className="form-home rounded-pill" type="text" placeholder="Search username..." />
             </Form.Group>
           </Form>
         </div>

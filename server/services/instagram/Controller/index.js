@@ -130,8 +130,8 @@ class InstagramController {
     // Add a wait for some selector on the home page to load to ensure the next step works correctly
     await page.waitFor(2000);
 
-    await page.screenshot({ path: "2.png" });
     await page.goto(`https://www.instagram.com/${req.params.user}/`);
+    await page.screenshot({ path: "2.png" });
 
     try {
       await page.waitForSelector(".h5uC0", {
@@ -158,11 +158,11 @@ class InstagramController {
       return res.status(200).json({ stories: [] });
     }
 
-    await page.waitFor(1500);
+    await page.waitFor(2000);
 
     await page.screenshot({ path: "4-testing.png" });
 
-    await page.waitFor(1500);
+    await page.waitFor(2000);
 
     await page.screenshot({ path: "5-testing.png" });
 
@@ -199,6 +199,7 @@ class InstagramController {
       );
       await page.waitFor(2500);
       const cookies = await page.cookies();
+      console.log(JSON.stringify(cookies, null, 2));
       fs.writeFileSync("./cookies.json", JSON.stringify(cookies, null, 2));
     }
 

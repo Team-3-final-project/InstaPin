@@ -4,7 +4,6 @@ const { User } = require('../models')
 
 class UserController {
     static register (req, res, next) {
-        console.log('---------1');
         const { username, email, password } = req.body
         if (!username) {
             throw {
@@ -40,10 +39,6 @@ class UserController {
                     email: newUser.email
                 })
                 return res.status(201).json({ access_token })
-            })
-            .catch(err => {
-                console.log(err);
-                next(err)
             })
     }
 
