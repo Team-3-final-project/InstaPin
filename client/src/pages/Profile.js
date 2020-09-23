@@ -123,7 +123,10 @@ export default function Profile() {
             <Post isPrivate={profileData.biography.is_private} post={profileData.posts} />
           </Route>
           <Route exact path={`${path}/story`}>
-            <Story isPrivate={profileData.biography.is_private} highlight={profileData.highlight} story={[]} />
+            <Story
+              isPrivate={profileData.biography.is_private}
+              highlight={profileData.highlight}
+            />
           </Route>
           <Route exact path={`${path}/igtv`}>
             <Igtv isPrivate={profileData.biography.is_private} igtv={profileData.igtv} />
