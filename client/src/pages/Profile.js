@@ -16,11 +16,12 @@ import DisplayPicture from "../components/displaypicture.js";
 import Post from "../components/post.js";
 import Story from "../components/story.js";
 import Igtv from "../components/igtv.js";
+import Highlight from "../components/highlight.js";
 import Button from "react-bootstrap/Button";
+
 export default function Profile() {
   const profileData = useSelector((store) => store.profileReducers.profile);
   const dispatch = useDispatch();
-  const [selected, setSelected] = useState("post");
   const { profile } = useParams();
   const { path, url } = useRouteMatch();
   const history = useHistory();
@@ -119,6 +120,17 @@ export default function Profile() {
           >
             IGTV
           </Button>
+          {
+            profileData.highlight &&
+            <Button
+            onClick={() => history.push(`${url}/highlight`)}
+            variant="outline-dark"
+            style={{ fontWeight: 700, fontSize: "16px" }}
+            className="ml-3 rounded-pill shadow-sm"
+            >
+            Highlight
+            </Button>
+          }
         </div>
         <Switch>
           <Route exact path={`${path}`}>
@@ -133,13 +145,17 @@ export default function Profile() {
           <Route exact path={`${path}/story`}>
             <Story
               isPrivate={profileData.biography.is_private}
-              highlight={profileData.highlight}
             />
           </Route>
           <Route exact path={`${path}/igtv`}>
             <Igtv
               isPrivate={profileData.biography.is_private}
               igtv={profileData.igtv}
+            />
+          </Route>
+          <Route exact path={`${path}/highlight`}>
+            <Highlight
+              isPrivate={profileData.biography.is_private}
             />
           </Route>
         </Switch>
