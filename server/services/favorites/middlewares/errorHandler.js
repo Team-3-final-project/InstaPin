@@ -4,7 +4,7 @@ module.exports = (err, req, res, next) => {
     let statusCode = 500
 
     if(err.errCode === 'INVALID_ACCOUNT') {
-        message = ['Please login first']
+        message = err.message || ['Please login first']
         statusCode = 401
     }
     if(err.errCode === 'NOT_FOUND') {
