@@ -51,16 +51,7 @@ export default function Profile() {
               onClick={() => history.push(`/${profile}`)}
               className="mr-3 pointer"
             >
-<<<<<<< HEAD
-              <img
-                className="rounded-circle"
-                style={{ width: "75px" }}
-                alt="profile_pic"
-                src={profileData.biography.profile_pic}
-              />
-=======
               <img className="rounded-circle" style={{width: "75px"}} alt="profile_pic" src={profileData.biography.profile_pic_hd} />
->>>>>>> f5ddfc24015b85d52f57b417e1998cd1102f1643
             </div>
             <div>
               <h5 style={{ fontWeight: 600 }}>
@@ -147,7 +138,6 @@ export default function Profile() {
             <Story
               isPrivate={profileData.biography.is_private}
               highlight={profileData.highlight}
-              story={[]}
             />
           </Route>
           <Route exact path={`${path}/igtv`}>

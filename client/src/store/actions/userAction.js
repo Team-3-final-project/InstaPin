@@ -1,11 +1,13 @@
 import axios from 'axios';
 import Swal from 'sweetalert2'
 
+const url = 'http://localhost:3000'
+
 export const userRegist = (user) => {
     return (dispatch) => {
         axios({
             method: 'POST',
-            url: 'http://localhost:3000/register',
+            url: `${url}/register`,
             data: {
                 username: user.username,
                 email: user.email,
@@ -41,7 +43,7 @@ export const userLogin = (user) => {
     return (dispatch) => {
         axios({
             method: 'POST',
-            url: 'http://localhost:3000/login',
+            url: `${url}/login`,
             data: {
                 email: user.email,
                 password: user.password
