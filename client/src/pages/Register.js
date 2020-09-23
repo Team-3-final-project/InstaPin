@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
+import { Link as Goes } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { userRegist } from '../store/actions/userAction'
 import Swal from 'sweetalert2'
+import { useHistory } from 'react-router';
 
 function Copyright() {
   return (
@@ -52,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   const dispatch = useDispatch()
+  const history = useHistory()
   const [user, setUser] = useState({
       username: null,
       email: null,
@@ -83,7 +86,6 @@ export default function SignUp() {
       }
       dispatch(userRegist(user))
   }
-
 
   return (
     <Container component="main" maxWidth="xs">
@@ -153,9 +155,9 @@ export default function SignUp() {
           </Button>
           <Grid container justify="center">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Goes to="/login" variant="body2">
                 Already have an account? Sign in
-              </Link>
+              </Goes>
             </Grid>
           </Grid>
         </form>
