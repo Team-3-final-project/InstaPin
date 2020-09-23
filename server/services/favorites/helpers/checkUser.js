@@ -1,6 +1,7 @@
 const axios = require('axios')
 
 module.exports = async (email) => {
+    console.log(email, '-------1');
     try{
         const {data} = await axios({
             url: 'http://localhost:3000/checkUser',

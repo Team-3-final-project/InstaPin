@@ -78,6 +78,7 @@ const resolvers = {
         },
         getFavorites: async (_, args) => {
             const data = await getFromServer(args, '')
+            console.log(data)
             return data
         },
         getPosts: async (_, args) => {

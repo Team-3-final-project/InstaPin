@@ -18,7 +18,6 @@ export function getProfile(profile) {
             profile: data
           }
         })
-        console.log(getState());
       })
       .catch(err => console.log(err))
   }
@@ -32,7 +31,6 @@ export function getHighlight(profile) {
         highlight: null
       }
     })
-    console.log("SET_HIGHLIGHT_DATA")
     fetch(`${url}/highlight/${profile}`)
       .then(resp => resp.json())
       .then(data => {
@@ -43,7 +41,6 @@ export function getHighlight(profile) {
             highlightData: data.highlight
           }
         })
-        console.log(getState());
       })
       .catch(err => console.log(err));
   }
@@ -60,7 +57,6 @@ export function getStory(profile, highlight) {
     fetch(`${url}/story/${profile}`)
       .then(resp => resp.json())
       .then(data => {
-        console.log(data);
         dispatch({
           type: "SET_STORY",
           payload: {
@@ -71,7 +67,6 @@ export function getStory(profile, highlight) {
           fetch(`${url}/get_highlight/${profile}`)
           .then(resp => resp.json())
           .then(data => {
-            console.log(data);
             dispatch({
               type: "SET_HIGHLIGHT",
               payload: {
@@ -81,7 +76,6 @@ export function getStory(profile, highlight) {
           })
           .catch(err => console.log(err));
         }
-        console.log(getState());
       })
       .catch(err => console.log(err));
   }

@@ -14,6 +14,7 @@ export default function Stories(props) {
         !x.is_video ? (
           <PhotoCard
             key={x.id}
+            type="stories"
             data={{
               id: x.id,
               image_url:
@@ -23,6 +24,7 @@ export default function Stories(props) {
           />
         ) : (
           <VideoCard
+            type="stories"
             key={x.id}
             data={{
               id: x.id,

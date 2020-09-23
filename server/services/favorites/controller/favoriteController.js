@@ -29,6 +29,7 @@ class favoriteController {
     }
 
     static async getFavorites (req,res,next) {
+        console.log('masuuuuuuk');
         try{
             const {email} = req.userLogin
             const favorites = await Favorite.getFavorites(email)

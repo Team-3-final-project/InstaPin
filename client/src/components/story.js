@@ -17,10 +17,8 @@ export default function Story(props) {
 
   useEffect(() => {
     if (!story) {
-      console.log('manggil dispatch')
       dispatch(getStory(profile, props.highlight));
     }
-    console.log(props.highlight)
   }, [profile]);
 
   if (props.isPrivate) {

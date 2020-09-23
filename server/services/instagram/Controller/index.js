@@ -155,7 +155,7 @@ class InstagramController {
       });
     } catch (err) {
       console.log(err);
-      return res.status(200).json({ stories: [] });
+      return res.status(200).json([]);
     }
 
     await page.waitFor(2000);
