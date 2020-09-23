@@ -67,7 +67,6 @@ export default function SignIn() {
 
     const doSubmit = (e) => {
         e.preventDefault()
-        console.log(user, '<<<');
         const { email, password } = user
         if ( !email || !password ) {
             return Swal.fire({

@@ -12,7 +12,6 @@ function errorHandler (err, req, res, next) {
             res.status(err.status).json({message: err.message});
             break;
         case 'SequelizeUniqueConstraintError':
-            console.log('error sequelize <<<');
             return res.status(409).json({message: "Email already registered!"});
         default:
             return res.status(500).json({message: 'Internal Server Error'})

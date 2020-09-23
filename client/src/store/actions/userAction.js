@@ -13,6 +13,7 @@ export const userRegist = (user) => {
             }
         })
             .then(({data}) => {
+                console.log(data);
                 dispatch({
                     type: 'SET_USER_REGIS',
                     payload: {
@@ -46,6 +47,7 @@ export const userLogin = (user) => {
             }
         })
             .then(({data}) => {
+                console.log(data);
                 dispatch({
                     type: 'SET_USER_LOGIN',
                     payload: {
