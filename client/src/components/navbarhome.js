@@ -62,17 +62,17 @@ export default function NavbarHome() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
         <Nav>
-          <Button 
+          <Button
             onClick={() => goLogin()}
-            variant="outline-dark" 
-            style={{fontWeight: 700}} 
+            variant="outline-dark"
+            style={{fontWeight: 700}}
             className="rounded-pill shadow-sm">
               Login Here
           </Button>
-          <Button 
+          <Button
             onClick={() => goRegis()}
-            variant="dark" 
-            style={{fontWeight: 700}} 
+            variant="dark"
+            style={{fontWeight: 700}}
             className="ml-3 rounded-pill shadow-sm">
               Register Here
           </Button>
