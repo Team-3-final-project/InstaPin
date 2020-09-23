@@ -7,11 +7,10 @@ import {
   Route,
 } from "react-router-dom";
 import "./Profile.css";
-import { getProfile } from "../store/actions";
-import { useSelector, useDispatch } from "react-redux";
+import { getProfile } from '../store/actions';
+import { useSelector, useDispatch } from 'react-redux';
 import Container from "react-bootstrap/Container";
-import NavbarHome from "../components/navbar.js";
-import Loading from "../components/Loading.js";
+import NavbarHome from "../components/navbarhome.js";
 import DisplayPicture from "../components/displaypicture.js";
 import Post from "../components/post.js";
 import Story from "../components/story.js";
@@ -19,7 +18,7 @@ import Igtv from "../components/igtv.js";
 import Button from "react-bootstrap/Button";
 
 export default function Profile() {
-  const profileData = useSelector((store) => store.profileReducers.profile);
+  const profileData = useSelector(store => store.profileReducers.profile);
   const dispatch = useDispatch();
   const [selected, setSelected] = useState("post");
   const { profile } = useParams();
@@ -28,15 +27,10 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(getProfile(profile));
-  }, [profile]);
+  }, [profile])
 
   if (!profileData)
-    return (
-      <>
-        <NavbarHome />
-        <Loading />
-      </>
-    );
+    return <h1>Loading</h1>
 
   return (
     <div
@@ -51,16 +45,7 @@ export default function Profile() {
               onClick={() => history.push(`/${profile}`)}
               className="mr-3 pointer"
             >
-<<<<<<< HEAD
-              <img
-                className="rounded-circle"
-                style={{ width: "75px" }}
-                alt="profile_pic"
-                src={profileData.biography.profile_pic}
-              />
-=======
               <img className="rounded-circle" style={{width: "75px"}} alt="profile_pic" src={profileData.biography.profile_pic_hd} />
->>>>>>> f5ddfc24015b85d52f57b417e1998cd1102f1643
             </div>
             <div>
               <h5 style={{ fontWeight: 600 }}>
@@ -84,19 +69,16 @@ export default function Profile() {
               <h5 style={{ fontWeight: 600, textAlign: "center" }}>
                 Following
               </h5>
-              <h6 style={{ fontWeight: 500, textAlign: "center" }}>
-                {profileData.biography.posts}
-              </h6>
-              <h6 style={{ fontWeight: 500, textAlign: "center" }}>
-                {profileData.biography.followers}
-              </h6>
-              <h6 style={{ fontWeight: 500, textAlign: "center" }}>
-                {profileData.biography.following}
-              </h6>
+              <h6 style={{ fontWeight: 500, textAlign: "center" }}>{profileData.biography.posts}</h6>
+              <h6 style={{ fontWeight: 500, textAlign: "center" }}>{profileData.biography.followers}</h6>
+              <h6 style={{ fontWeight: 500, textAlign: "center" }}>{profileData.biography.following}</h6>
             </div>
             <Button
               onClick={() =>
-                window.open(`https://www.instagram.com/${profile}`, "_blank")
+                window.open(
+                  `https://www.instagram.com/${profile}`,
+                  "_blank"
+                )
               }
               variant="light"
               size="sm"
@@ -138,23 +120,13 @@ export default function Profile() {
             <DisplayPicture url={profileData.biography.profile_pic_hd} />
           </Route>
           <Route exact path={`${path}/post`}>
-            <Post
-              isPrivate={profileData.biography.is_private}
-              post={profileData.posts}
-            />
+            <Post isPrivate={profileData.biography.is_private} post={profileData.posts} />
           </Route>
           <Route exact path={`${path}/story`}>
-            <Story
-              isPrivate={profileData.biography.is_private}
-              highlight={profileData.highlight}
-              story={[]}
-            />
+            <Story isPrivate={profileData.biography.is_private} highlight={profileData.highlight} story={[]} />
           </Route>
           <Route exact path={`${path}/igtv`}>
-            <Igtv
-              isPrivate={profileData.biography.is_private}
-              igtv={profileData.igtv}
-            />
+            <Igtv isPrivate={profileData.biography.is_private} igtv={profileData.igtv} />
           </Route>
         </Switch>
       </Container>
