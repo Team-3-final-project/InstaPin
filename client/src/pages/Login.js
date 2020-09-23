@@ -19,9 +19,9 @@ import Swal from 'sweetalert2'
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="textSecondary" align="center" style={{fontFamily: 'Montserrat', fontWeight: 700}}>
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="/">
         InstaPin
       </Link>{' '}
       {new Date().getFullYear()}
@@ -90,7 +90,7 @@ export default function SignIn() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" style={{fontFamily: 'Montserrat', fontWeight: 700}}>
           Sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={(e) => doSubmit(e)}>
@@ -128,12 +128,13 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            style={{fontFamily: 'Montserrat', fontWeight: 700}}
           >
             Sign In
           </Button>
           <Grid container justify="center">
             <Grid item>
-              <Goes to="/register" variant="body2">
+              <Goes to="/register" variant="body2" style={{fontFamily: 'Montserrat', fontWeight: 700}}>
                 {"Don't have an account? Sign Up"}
               </Goes>
             </Grid>

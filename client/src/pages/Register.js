@@ -20,10 +20,10 @@ import { useHistory } from 'react-router';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="textSecondary" align="center" style={{fontFamily: 'Montserrat', fontWeight: 700}}>
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        InstaPIn
+      <Link color="inherit" href="/">
+        InstaPin
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -94,7 +94,7 @@ export default function SignUp() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography style={{fontFamily: 'Montserrat', fontWeight: 700}} component="h1" variant="h5">
           Sign up
         </Typography>
         <form className={classes.form} noValidate onSubmit={(e) => doSubmit(e)}>
@@ -145,6 +145,7 @@ export default function SignUp() {
             </Grid>
           </Grid>
           <Button
+            style={{fontFamily: 'Montserrat', fontWeight: 700}}
             type="submit"
             fullWidth
             variant="contained"
@@ -155,7 +156,7 @@ export default function SignUp() {
           </Button>
           <Grid container justify="center">
             <Grid item>
-              <Goes to="/login" variant="body2">
+              <Goes to="/login" variant="body2" style={{fontFamily: 'Montserrat', fontWeight: 700}}>
                 Already have an account? Sign in
               </Goes>
             </Grid>
