@@ -1,9 +1,5 @@
 const jwt = require('jsonwebtoken');
-const secretKey = process.env.SECRET;
-
-function encode (obj) {
-    return jwt.sign(obj, secretKey);
-};
+const secretKey = process.env.SECRET ;
 
 function decode (accesToken) {
     try {
@@ -15,6 +11,5 @@ function decode (accesToken) {
 };
 
 module.exports = {
-    encode,
     decode
 };

@@ -7,8 +7,9 @@ class favoriteController {
             const favorite = await Favorite.getFavorite(type, id)
             if(!favorite) {
                 return next({errCode: 'NOT_FOUND'})
+            } else {
+                res.status(200).json(favorite)
             }
-            res.status(200).json(favorite)
         }
         catch (err) {
             next(err)

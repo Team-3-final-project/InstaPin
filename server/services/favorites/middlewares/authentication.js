@@ -1,15 +1,26 @@
 const {decode} = require('../helpers/jwt.js')
+const checkUser = require('../helpers/checkUser.js')
+module.exports = async (req,res,next) => {
+    try {
+        if(req.headers.access_token) {
+            const userLogin = decode(req.headers.access_token)
+            if (userLogin.name === 'JsonWebTokenError' || !userLogin) return next({errCode: 'INVALID_ACCOUNT'})
 
-module.exports = (req,res,next) => {
+            const isValid = await checkUser(userLogin.email)
 
-    if(req.headers.access_token) {
-        const userLogin = decode(req.headers.access_token)
-        if (!userLogin) return next({errCode: 'INVALID_ACCOUNT'})
-        req.userLogin = userLogin
-        next()
+            if(isValid) {
+                req.userLogin = userLogin
+                next()
+            } else {
+                next({errCode: 'INVALID_ACCOUNT', message: 'Wrong account!'})
+            }
+        }
+        else {
+            next ({errCode: 'INVALID_ACCOUNT'})
+        }
     }
-    else {
-        next ({errCode: 'INVALID_ACCOUNT'})
+    catch (err) {
+        next(err)
     }
 
 }
