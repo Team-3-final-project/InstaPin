@@ -17,6 +17,8 @@ import Container from '@material-ui/core/Container';
 import { userRegist } from '../store/actions/userAction'
 import Swal from 'sweetalert2'
 import { useHistory } from 'react-router';
+import GoogleBtn from '../components/GoogleBtn';
+import Navbar from '../components/navbarhome'
 
 function Copyright() {
   return (
@@ -85,9 +87,12 @@ export default function SignUp() {
           })
       }
       dispatch(userRegist(user))
+      history.push('/')
   }
 
   return (
+    <>
+    <Navbar />
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -166,5 +171,6 @@ export default function SignUp() {
         <Copyright />
       </Box>
     </Container>
+    </>
   );
 }
