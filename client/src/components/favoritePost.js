@@ -9,7 +9,7 @@ export default function FavoritePost({data, name}) {
     <div className="mn-profile mt-3 mb-3 overflow-auto">
       {
 
-        data.length < 1 ? <h1 style={{fontWeight: 800, color: "#333333"}}>There is no {name} to see...</h1> : data.map(x => x.image_url ? <FavoritePhotoCard key={x._id} data={x} /> : <FavoriteVideoCard key={x.id} data={x} />)
+        data.length < 1 ? <h1 style={{fontWeight: 800, color: "#333333"}}>There is no {name} to see...</h1> : data.map(x => x.image_url ? <FavoritePhotoCard key={x._id} data={x} type={name} /> : <FavoriteVideoCard key={x.id} type={name} data={x} />)
       }
     </div>
   );

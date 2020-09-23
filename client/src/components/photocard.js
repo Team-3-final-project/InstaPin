@@ -1,17 +1,88 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./photocard.css";
 import Button from "react-bootstrap/Button";
+import {useParams} from 'react-router-dom'
+import {useMutation, useQuery} from '@apollo/client'
+import {ADD_POST, ADD_HIHGHLIGHT, ADD_STORY} from '../Mutation'
+import {FETCH_ALL} from '../Query'
+import Swal from 'sweetalert2'
 
 export default function PhotoCard(props) {
-  const { image_url, likes, uploaded_at } = props.data;
+  const params = useParams()
+  const {profile} = params
+  const { image_url, id, likes, uploaded_at } = props.data;
+  const {type} = props
+  const access_token = localStorage.access_token
+  const [isFavorite, setIsFavorite] = useState(false)
+  const {loading, error, data} = useQuery(FETCH_ALL, {
+    variables: { access_token: localStorage.access_token }
+  })
+
+  useEffect(() => {
+    if(data) {
+      const checkFav = data.getFavorites[type].filter(post => post.id === id)
+      if(checkFav.length > 0) setIsFavorite(true)
+    }
+  }, [data])
+
+
+
+  const [addPost] = useMutation(ADD_POST, {
+    refetchQueries: [{query: FETCH_ALL, variables: { access_token } }]
+  })
+
+  const [addHighlight] = useMutation(ADD_HIHGHLIGHT, {
+    refetchQueries: [{query: FETCH_ALL, variables: { access_token } }]
+  })
+
+  const [addStory] = useMutation(ADD_STORY, {
+    refetchQueries: [{query: FETCH_ALL, variables: { access_token } }]
+  })
+
+  const inputQuery = {
+      id,
+      image_url,
+      access_token,
+      username: profile,
+      video_url: null
+  }
+
+  const handleClick = (e)=> {
+    e.preventDefault()
+    switch (type) {
+      case 'posts':
+        addPost({ variables: inputQuery })
+        break;
+      case 'stories':
+        addStory({ variables: inputQuery })
+        break;
+      case 'highlights':
+        addHighlight({ variables: inputQuery })
+        break;
+      default:
+        break;
+    }
+    Swal.fire(
+      'Success!',
+      'Added to your favorite!',
+      'success'
+    )
+  }
+
+  // if(loading) return <h1>Loading...</h1>
+  if(error) return <p>Error...  {JSON.stringify(error)}</p>
+
   return (
     <div className="photo-card shadow-sm mr-2 mt-2 ml-2 mb-2">
       <div className="photo mb-3">
         <img src={image_url} alt="post" />
       </div>
       <div className="d-flex justify-content-center">
+      {
+        !isFavorite &&
       <Button
         variant="light"
+        onClick={(e) => handleClick(e)}
         style={{ fontWeight: 700, fontSize: "16px" }}
         className="ml-2 rounded-pill shadow-sm"
       >
@@ -29,6 +100,7 @@ export default function PhotoCard(props) {
           />
         </svg>
       </Button>
+      }
       <Button
         onClick={() => window.open(image_url, "_blank")}
         variant="light"
