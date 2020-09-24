@@ -19,10 +19,15 @@ export default function PhotoCard(props) {
   })
 
   useEffect(() => {
-    if(data) {
-      const checkFav = data.getFavorites[type].filter(post => post.id === id)
-      if(checkFav.length > 0) setIsFavorite(true)
+    if(localStorage.access_token) {
+        if(data) {
+        const checkFav = data.getFavorites[type].filter(post => post.id === id)
+        if(checkFav.length > 0) setIsFavorite(true)
+      }
+    } else {
+      setIsFavorite(true)
     }
+
   }, [data])
 
 
@@ -70,7 +75,7 @@ export default function PhotoCard(props) {
   }
 
   // if(loading) return <h1>Loading...</h1>
-  if(error) return <p>Error...  {JSON.stringify(error)}</p>
+  // if(error) return ''
 
   return (
     <div className="photo-card shadow-sm mr-2 mt-2 ml-2 mb-2">

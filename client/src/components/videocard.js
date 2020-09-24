@@ -18,9 +18,13 @@ export default function VideoCard(props) {
   })
 
   useEffect(() => {
-    if(data) {
-      const checkFav = data.getFavorites[type].filter(post => post.id === id)
-      if(checkFav.length > 0) setIsFavorite(true)
+    if(localStorage.access_token) {
+      if(data) {
+        const checkFav = data.getFavorites[type].filter(post => post.id === id)
+        if(checkFav.length > 0) setIsFavorite(true)
+      }
+    } else {
+      setIsFavorite(true)
     }
   }, [data])
 

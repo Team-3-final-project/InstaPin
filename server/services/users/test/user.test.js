@@ -24,7 +24,7 @@ beforeAll(async (done) => {
         })
         .catch(err => {
             done (err)
-        }) 
+        })
 })
 
 describe('User Routes', () => {
@@ -217,28 +217,28 @@ describe('User Routes', () => {
                     done(err)
                 })
         })
-        // test('400 Register failed duplicate email - should return json message', (done) => {
-        //     const userRegister = {
-        //         username: 'username',
-        //         email: 'user@mail.com',
-        //         password: '1234'
-        //     }
-        //     return request(app)
-        //         .post('/register')
-        //         .send(userRegister)
-        //         .set('Accept', 'application/json')
-        //         .then(response => {
-        //             expect.fail()
-        //             // const { body, status } = response
-        //             // expect(status).toBe(409)
-        //             // expect(body).toHaveProperty('message', 'Email already registered!')
-        //             done()
-        //         })
-        //         .catch((err) => {
-        //             expect(err['name'].to.be.equal('SequelizeUniqueConstraintError:'))
-        //             done()
-        //         })
-        // })
+        test('409 Register failed duplicate email - should return json message', (done) => {
+            const userRegister = {
+                username: 'username',
+                email: 'user@mail.com',
+                password: '1234'
+            }
+            return request(app)
+                .post('/register')
+                .send(userRegister)
+                .set('Accept', 'application/json')
+                .then(response => {
+                    // expect.fail()
+                    const { body, status } = response
+                    expect(status).toBe(409)
+                    expect(body).toHaveProperty('message', "Email already registered!")
+                    done()
+                })
+                .catch((err) => {
+                    expect(err['name'].to.be.equal('SequelizeUniqueConstraintError:'))
+                    done()
+                })
+        })
     })
     describe('POST /checkUser', () => {
         test('200 isValid true - should return json message', (done) => {
@@ -254,7 +254,7 @@ describe('User Routes', () => {
                     expect(status).toBe(200)
                     expect(body).toHaveProperty('isValid', true)
                     done()
-                }) 
+                })
                 .catch(err => {
                     console.log(err);
                 })
@@ -275,7 +275,7 @@ describe('User Routes', () => {
                 })
                 .catch(err => {
                     console.log(err);
-                }) 
+                })
         })
     })
 })
