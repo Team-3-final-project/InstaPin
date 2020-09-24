@@ -1,0 +1,51 @@
+.bg-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40rem;
+  background: linear-gradient(78.37deg, #8CA5FF -8.7%, rgba(255, 255, 255, 0) 60.73%), #2D9CDB;
+  box-shadow: 0px 10px 39px -12px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 0px 81px 81px;
+}
+
+.bg-text {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 59px;
+  text-align: center;
+
+  color: #F2F2F2;
+}
+
+.form-home {
+  font-size: 30px;
+  font-weight: 800;
+  padding: 36px;
+  color: #C7C7C7;
+}
+
+.footer-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rc-home {
+  width: 100px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.rc-home > img {
+  width: 100px;
+}
+
+.rc-home > img:hover {
+  opacity: 0.8;
+}
