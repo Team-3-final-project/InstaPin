@@ -1,5 +1,5 @@
 const request = require('supertest')
-const app = require('../app.js')
+const app = require('../app2.js')
 const image_url = 'https://i.stack.imgur.com/NlSfJ.png?s=328&g=1'
 const video_url = 'https://www.youtube.com/watch?v=1AhOK4UwAMs'
 const idIg = '123456'
