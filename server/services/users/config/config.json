@@ -1,15 +1,15 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
-    "database": "InstaPin__DB",
+    "password": "Corine48",
+    "database": "InstaPin",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": 1234,
-    "database": "InstaPIn",
+    "password": "Corine48",
+    "database": "InstaPIn_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
