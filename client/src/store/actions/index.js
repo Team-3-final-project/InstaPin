@@ -11,7 +11,6 @@ export function getProfile(profile) {
     fetch(`${url}/${profile}`)
       .then(resp => resp.json())
       .then(data => {
-        console.log(data);
         dispatch({
           type: "SET_PROFILE",
           payload: {
@@ -26,7 +25,7 @@ export function getProfile(profile) {
 export function getHighlight(profile) {
   return (dispatch, getState) => {
     dispatch({
-      type: "SET_HIGHLIGHT_DATA",
+      type: "SET_HIGHLIGHT",
       payload: {
         highlight: null
       }
@@ -34,11 +33,16 @@ export function getHighlight(profile) {
     fetch(`${url}/highlight/${profile}`)
       .then(resp => resp.json())
       .then(data => {
-        console.log(data);
+        const newData = [];
+
+        for (let i of data.data) {
+          for (let j of i.items)
+            newData.push(j);
+        }
         dispatch({
-          type: "SET_HIGHLIGHT_DATA",
+          type: "SET_HIGHLIGHT",
           payload: {
-            highlightData: data.highlight
+            highlight: newData
           }
         })
       })
@@ -63,19 +67,6 @@ export function getStory(profile, highlight) {
             story: data
           }
         })
-        if (highlight) {
-          fetch(`${url}/get_highlight/${profile}`)
-          .then(resp => resp.json())
-          .then(data => {
-            dispatch({
-              type: "SET_HIGHLIGHT",
-              payload: {
-                highlight: data.highlight
-              }
-            })
-          })
-          .catch(err => console.log(err));
-        }
       })
       .catch(err => console.log(err));
   }

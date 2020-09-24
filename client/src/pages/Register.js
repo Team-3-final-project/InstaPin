@@ -17,7 +17,6 @@ import Container from '@material-ui/core/Container';
 import { userRegist } from '../store/actions/userAction'
 import Swal from 'sweetalert2'
 import { useHistory } from 'react-router';
-import GoogleBtn from '../components/GoogleBtn';
 import Navbar from '../components/navbarhome'
 
 function Copyright() {

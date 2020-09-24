@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 export default function VideoCard(props) {
   const params = useParams()
   const {profile} = params
-  const { video_url, id, views, likes, uploaded_at } = props.data;
+  const { video_url, id } = props.data;
   const {type} = props
   const access_token = localStorage.access_token
   const [isFavorite, setIsFavorite] = useState(false)
