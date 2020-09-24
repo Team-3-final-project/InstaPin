@@ -40,6 +40,9 @@ class UserController {
                 })
                 return res.status(201).json({ access_token })
             })
+            .catch(err => {
+                next(err)
+            })
     }
 
     static login (req, res, next) {

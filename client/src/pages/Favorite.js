@@ -10,7 +10,8 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import {useQuery} from '@apollo/client'
 import {FETCH_ALL} from '../Query'
-import NavbarHome from '../components/navbarhome.js'
+import NavbarHome from '../components/navbar.js'
+import Loading from "../components/Loading.js";
 
 export default function Favorites() {
   const { url } = useRouteMatch();
@@ -20,8 +21,13 @@ export default function Favorites() {
     variables: { access_token: localStorage.access_token }
   })
 
-  if(loading) return <h1>Loading...</h1>
-  if(error) return <p>Error...  {JSON.stringify(error)}</p>
+  if(loading) return (
+    <>
+    <NavbarHome />
+    <Loading />
+    </>
+  )
+  if(error) return history.push('/')
 
   const favorites = data.getFavorites
   return (

@@ -19,7 +19,8 @@ export default function NavbarProfile() {
   };
 
   const goLogout = () => {
-
+    localStorage.clear()
+    history.push('/')
   }
   const inputLodash = _.debounce((e) => {
     if (e.length > 2) history.push(`/${e}`);
